@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <title>電子白板</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+  <!-- 控制欄 -->
+  <div id="toolbar" class="toolbar-left">
+    <button id="mouse-tool" class="tool-button"><i class="fas fa-mouse-pointer"></i></button>
+    <button id="pen-tool" class="tool-button"><i class="fas fa-pen"></i></button>
+    <button id="pen-settings-toggle" class="tool-button arrow-button" data-sp="pen-setting"><i class="fas fa-chevron-right"></i></button>
+    <div id="pen-settings" class="tools-settings">
+      <label for="pen-color">Color: <input type="color" id="pen-color" value="#000000"></label>
+      <label for="pen-size">Size: <input type="range" id="pen-size" min="1" max="20" value="5"></label>
+    </div>
+    <button id="shape-tool" class="tool-button"><i class="fas fa-slash"></i></button>
+    <button id="shape-settings-toggle" class="tool-button arrow-button" data-sp="shape-setting"><i class="fas fa-chevron-right"></i></button>
+    <div id="shape-settings" class="tools-settings">
+      <label for="shape-color">Color: <input type="color" id="shape-color" value="#000000"></label>
+      <label for="shape-size">Size: <input type="range" id="shape-size" min="1" max="20" value="5"></label>
+    </div>
+    <button id="eraser-tool" class="tool-button"><i class="fas fa-eraser"></i></button>
+    <button id="eraser-settings-toggle" class="tool-button arrow-button" data-sp="eraser-setting"><i class="fas fa-chevron-right"></i></button>
+    <div id="eraser-settings" class="tools-settings">
+      <label for="eraser-size">Size: <input type="range" id="eraser-size" min="5" max="30" value="10"></label>
+    </div>
+    <hr id="toolbar-divider">
+    <button id="settings-button" class="tool-button"><i class="fas fa-cog"></i></button>
+    <div class="toolbar-toggle">
+      <button id="toolbar-close" class="tool-button toolbar-close"><i class="fas fa-chevron-left"></i></button>
+      <button id="toolbar-open" class="tool-button arrow-open"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+  </div>
+
+  <!-- 畫布 -->
+  <div id="canvas-container">
+    <canvas id="drawing-canvas"></canvas>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+
+</html>

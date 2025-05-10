@@ -1,0 +1,193 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#toolbar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 55px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: left 0.3s;
+  z-index: 10;
+}
+
+.tool-button {
+  margin: 2px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tool-button:hover {
+  background-color: #ddd;
+}
+
+.tool-button.active {
+  background-color: #bbb;
+}
+
+
+#toolbar-bottom {
+  margin-bottom: 10px;
+}
+
+#toolbar-divider {
+  width: 80%;
+  height: 3px;
+  border: none;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  cursor: move;
+}
+
+.arrow-button {
+  border: 1px 1px 1px 0 solid #ccc;
+  border-radius: 0 5px 5px 0;
+  font-size: 16px;
+  width: 15px;
+  height: 50px;
+  position: absolute;
+  padding: 1px;
+  display: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  z-index: 12;
+}
+
+.toolbar-left .arrow-button {
+  right: -16px;
+  border: 1px 1px 1px 0 solid #ccc;
+  border-radius: 0 5px 5px 0;
+}
+
+.toolbar-left .arrow-button.active {
+  right: -165px;
+  background-color: #f0f0f0;
+}
+
+.toolbar-right .arrow-button {
+  right: 100%;
+  border: 1px 0 1px 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.toolbar-right .arrow-button.active {
+  left: -165px;
+  background-color: #f0f0f0;
+}
+
+.arrow-button.active:hover {
+  background-color: #ddd;
+}
+
+.tools-settings {
+  display: none;
+  position: absolute;
+  transform: translateY(-50%);
+  background-color: #f0f0f0;
+  padding: 10px;
+  z-index: 11;
+}
+
+.toolbar-left .tools-settings{
+  left: 100%;
+  border: 1px 1px 1px 0 solid #ccc;
+  border-radius: 0 5px 5px 0;
+}
+
+.toolbar-right .tools-settings{
+  right: 100%;
+  border: 1px 0 1px 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.tools-settings label {
+  display: block;
+  margin-top: 10px;
+}
+
+.tools-settings.active {
+  display: block;
+}
+
+#pen-settings-toggle {
+  top: 55px;
+}
+
+#pen-settings {
+  top: 110px;
+}
+
+#shape-settings-toggle {
+  top: 110px;
+}
+
+#shape-settings {
+  top: 160px;
+}
+
+#eraser-settings-toggle {
+  top: 160px;
+}
+
+#eraser-settings {
+  top: 190px;
+}
+
+#toolbar-close {
+  height: 25px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#toolbar-open {
+  font-size: 16px;
+  width: 15px;
+  height: 50px;
+  top: 50%;
+  position: absolute;
+  padding: 1px;
+  display: none;
+  background-color: #f0f0f0;
+  transition: left 0.3s;
+  cursor: pointer;
+  z-index: 12;
+
+}
+
+.toolbar-left #toolbar-open {
+  right: -16px;
+  border: 1px 1px 1px 0 solid #ccc;
+  border-radius: 0 5px 5px 0;
+}
+
+.toolbar-right #toolbar-open {
+  right: 100%;
+  border: 1px 0 1px 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+#canvas-container {
+  position: absolute;
+  left: 0px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#drawing-canvas {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}

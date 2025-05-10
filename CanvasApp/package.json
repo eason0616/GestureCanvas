@@ -1,0 +1,66 @@
+{
+  "name": "hnrc_proj",
+  "version": "0.0.1",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64",
+    "test": "cross-env NODE_ENV=production electron .",
+    "debug": "electron --inspect=5858 ."
+  },
+  "keywords": [],
+  "author": {
+    "name": "Chun-Ming Lin",
+    "email": "linj80912@gmail.com"
+  },
+  "license": "MIT",
+  "description": "A useful hand recognition whiteboard",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^32.2.1",
+    "electron-builder": "^24.13.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "build": {
+    "appId": "com.linj80912.com",
+    "productName": "hnrc_proj",
+    "directories": {
+      "output": "dist"
+    },
+    "asar": true,
+    "compression": "maximum",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "linj80912",
+        "repo": "hnrc_proj",
+        "releaseType": "release"
+      }
+    ],
+    "files": [
+      "main.js",
+      "index.html",
+      "renderer.js"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icons/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icons/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icons/icon.png"
+    }
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "electron-updater": "^6.3.4"
+  }
+}
