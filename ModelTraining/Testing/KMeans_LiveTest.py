@@ -1,13 +1,15 @@
 import cv2
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 
-import TrainingFunc
-from LiveTest_DataProcessing import LiveTest_DataProcessing as DataProcessing
+from ModelTraining import LoadSave
+from ModelTraining.Testing.LiveTest_DataProcessing import LiveTest_DataProcessor as DataProcessor
 
 class GestureCanvas_KMeans:
     def __init__(self):
-        self.model = TrainingFunc.load_model("KMeans_2")
-        self.scaler = TrainingFunc.load_scaler("KMeans_2")
-        self.DataProcessing = DataProcessing()
+        self.model: KMeans = LoadSave.load_model("KMeans_2")
+        self.scaler: StandardScaler = LoadSave.load_scaler("KMeans_2")
+        self.DataProcessing = DataProcessor()
 
         print("HandRecognition Initialized.")
 

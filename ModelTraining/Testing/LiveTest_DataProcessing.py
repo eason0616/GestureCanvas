@@ -1,12 +1,12 @@
 import cv2
 import numpy as np
 
-from Data.DataProcessBase import DataProcessBase
+from ModelTraining.Data.ProcessBase import DataProcessBase
 
 import warnings
 warnings.filterwarnings("ignore", category= UserWarning)
 
-class LiveTest_DataProcessing(DataProcessBase):
+class LiveTest_DataProcessor(DataProcessBase):
     """
     實時數據處理類別
 

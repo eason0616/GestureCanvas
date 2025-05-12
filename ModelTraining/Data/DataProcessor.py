@@ -2,12 +2,12 @@ import cv2
 import os
 import numpy as np
 
-from DataProcessBase import DataProcessBase
-from DataAugmentation import HandDataAugmentation
+from ModelTraining.Data.ProcessBase import DataProcessBase
+from ModelTraining.Data.DataAugmentation import HandDataAugmentation
 
 # 設定資料夾路徑
 DIR_PATH = os.path.dirname(os.path.abspath(__file__))
-UNPROCESSDATA_PATH = os.path.join(DIR_PATH, "OriginImgs")
+UNPROCESSDATA_PATH = os.path.join(DIR_PATH, "RawImgs")
 DATASETS_PATH = os.path.join(DIR_PATH, "DataSets")
 
 # 設定 numpy 的印出格式, 關閉科學記號表示法

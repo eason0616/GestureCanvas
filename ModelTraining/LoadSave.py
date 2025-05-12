@@ -51,7 +51,7 @@ def save_model(model, model_name: str) -> None:
 
     # 設定模型儲存路徑, 路徑 .Data/TrainedModels/{ModelName}_Model.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(dir_path, "Data", "TrainedModels", model_name + "_Model.joblib")
+    model_path = os.path.join(dir_path, "TrainedModels", model_name + "_Model.joblib")
 
     # 使用設定路徑儲存模型
     dump(model, model_path)
@@ -77,7 +77,7 @@ def load_model(model_name: str) -> object:
 
     # 設定模型載入路徑, 路徑 .Data/TrainedModels/{ModelName}_Model.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(dir_path, "Data", "TrainedModels", model_name + "_Model.joblib")
+    model_path = os.path.join(dir_path, "TrainedModels", model_name + "_Model.joblib")
 
     # 顯示載入路徑
     print(f"Loading model from {model_path}")
@@ -98,7 +98,7 @@ def save_scaler(scaler, scaler_name: str) -> None:
 
     # 設定標準化器儲存路徑, 路徑 .Data/TrainedModels/{ScalerName}_Scaler.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    scaler_path = os.path.join(dir_path, "Data", "TrainedModels", scaler_name + "_Scaler.joblib")
+    scaler_path = os.path.join(dir_path, "TrainedModels", scaler_name + "_Scaler.joblib")
 
     # 使用設定路徑儲存標準化器
     dump(scaler, scaler_path)
@@ -124,7 +124,7 @@ def load_scaler(scaler_name: str) -> StandardScaler:
 
     # 設定標準化器載入路徑, 路徑 .Data/TrainedModels/{ScalerName}_Scaler.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    scaler_path = os.path.join(dir_path, "Data", "TrainedModels", scaler_name + "_Scaler.joblib")
+    scaler_path = os.path.join(dir_path, "TrainedModels", scaler_name + "_Scaler.joblib")
 
     # 顯示載入路徑
     print(f"Loading scaler from {scaler_path}")

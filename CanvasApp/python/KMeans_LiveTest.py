@@ -1,14 +1,14 @@
 import cv2
 import pyautogui
 
-import TrainingFunc
+import LoadSave
 from LiveTest_DataProcessing import LiveTest_DataProcessing as DataProcessing
 from mouse_control import MouseController
 
 class GestureCanvas_KMeans:
     def __init__(self):
-        self.model = TrainingFunc.load_model("KMeans_2")
-        self.scaler = TrainingFunc.load_scaler("KMeans_2")
+        self.model = LoadSave.load_model("KMeans_2")
+        self.scaler = LoadSave.load_scaler("KMeans_2")
         self.DataProcessing = DataProcessing()
 
         self.mouse = MouseController()

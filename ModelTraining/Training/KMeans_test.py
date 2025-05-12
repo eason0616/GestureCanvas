@@ -4,12 +4,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-import TrainingFunc
+from ModelTraining import LoadSave
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(suppress=True)
 
-X, y = TrainingFunc.load_dataset(1)
+X, y = LoadSave.load_dataset(1)
 X_flatten = X.reshape(X.shape[0], -1)
 print(X_flatten.shape)
 # print(data_flatten)
@@ -26,8 +26,8 @@ y_pred = kmeans.fit_predict(X_scaled)
 print(y_pred)
 print(kmeans.cluster_centers_)
 
-TrainingFunc.save_model(kmeans, f"KMeans_{n_clusters}")
-TrainingFunc.save_scaler(scaler, f"KMeans_{n_clusters}")
+LoadSave.save_model(kmeans, f"KMeans_{n_clusters}")
+LoadSave.save_scaler(scaler, f"KMeans_{n_clusters}")
 
 # 使用 PCA 將數據降至 2D 進行可視化
 from sklearn.decomposition import PCA

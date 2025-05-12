@@ -27,22 +27,22 @@ class DataProcessBase:
             min_detection_confidence=0.5,           # 最小偵測信心值
             min_tracking_confidence=0.5             # 最小追蹤信心值
         )
-    
+
     def __del__(self):
         """
         釋放 MediaPipe 偵測手部關鍵點的物件
         """
         self.mp_hands.close()
 
-    def Normalize_Landmark_Coords(self, landmarks, draw=False, frame=None) -> tuple[np.ndarray, np.ndarray]:
+    def Normalize_Landmark_Coords(self, landmarks, draw: bool = False, frame = None) -> tuple[np.ndarray, np.ndarray]:
         """
         歸一化手部關鍵點座標
-        
+
         將手部關鍵點座標進行標準化處理:
         1. 提取所有關鍵點的 x, y, z 座標
         2. 計算所有關鍵點的中心點並進行平移使中心點置中
         3. 計算手掌方向並進行旋轉, 使手掌朝向固定方向
-        
+
         Args:
             landmarks: 由 MediaPipe 偵測到的手部關鍵點
             draw: 是否繪製關鍵點到影像上
@@ -52,7 +52,7 @@ class DataProcessBase:
             - frame (numpy.ndarray): 繪製後的影像, 如果 draw=False 則為 None
             - coords (numpy.ndarray): 歸一化後的手部關鍵點座標, 形狀為 (21, 3), 每個關鍵點包含 (x, y, z) 座標
         """
-        
+
         # 提取所有關鍵點的 x, y, z 座標為 numpy 陣列 格式為 [[x, y, z], ...], 並四捨五入到小數點後 4 位
         coords = np.array([[lm.x, lm.y, lm.z] for lm in landmarks.landmark])
 
@@ -62,10 +62,10 @@ class DataProcessBase:
 
         # 計算手掌方向向量 (從手腕到中指根部)
         direction_vector = coords[9] - coords[0]
-        
+
         # 計算Z軸旋轉角度 (使手掌朝右)
         angle_z = np.arctan2(direction_vector[1], direction_vector[0])
-        
+
         # Z軸旋轉矩陣
         Rz = np.array([
             [np.cos(angle_z), -np.sin(angle_z), 0],
@@ -75,7 +75,7 @@ class DataProcessBase:
 
         # 如果有要繪製的影像, 則保留原始座標作為對比使用
         origin_coords = coords.copy() if draw and frame is not None else None
-        
+
         # 應用旋轉矩陣
         coords = coords @ Rz
 
@@ -86,7 +86,7 @@ class DataProcessBase:
         else:
             # 回傳歸一化後的座標, 並四捨五入到小數點後 4 位
             return None, np.round(coords, 4)
-    
+
     def Render_Landmarks(self, frame, center: tuple, coords: np.ndarray, origin_coords: np.ndarray) -> np.ndarray:
         """
         在畫面上渲染手部關鍵點。
@@ -114,25 +114,30 @@ class DataProcessBase:
         center_x, center_y, center_z = center
 
         # 獲取手部中心點在畫面中的像素位置, 並繪製在畫面上
-        handCenter_x, handCenter_y = int(center_x * width), int(center_y * height)  # 手部中心點在畫面中的像素位置
+        handCenter_x, handCenter_y = int(
+            center_x * width), int(center_y * height)  # 手部中心點在畫面中的像素位置
 
         # 繪製原始手部關鍵點
-        cv2.circle(origin_frame, (handCenter_x, handCenter_y), 5, (255, 0, 0), -1)
-        Pos = np.array([[int((center_x + x) * width), int((center_y + y) * height)] for x, y, z in origin_coords])
-        for p in Pos:
-            cv2.circle(origin_frame, p, 5, (0, 255, 255), -1)
+        cv2.circle(origin_frame, (handCenter_x, handCenter_y),
+                   5, (255, 0, 0), -1)
+        if origin_coords is not None:
+            Pos = np.array([[int((center_x + x) * width), int((center_y + y) * height)]
+                           for x, y, z in origin_coords])
+            for p in Pos:
+                cv2.circle(origin_frame, p, 5, (0, 255, 255), -1)
 
         # 繪製處理後的手部關鍵點
         cv2.circle(frame, (handCenter_x, handCenter_y), 5, (255, 0, 0), -1)
-        Pos = np.array([[int((center_x + x) * width), int((center_y + y) * height)] for x, y, z in coords])
+        Pos = np.array([[int((center_x + x) * width),
+                       int((center_y + y) * height)] for x, y, z in coords])
         for p in Pos:
             cv2.circle(frame, p, 5, (128, 255, 0), -1)
-        
+
         # 將兩個畫面並排顯示
         origin_frame = cv2.resize(origin_frame, (640, 480))
         frame = cv2.resize(frame, (640, 480))
         frame = cv2.hconcat([frame, origin_frame])
-        
+
         return frame
 
     def PreprocessImage(self, frame: np.ndarray) -> tuple[np.ndarray, mp.solutions.hands.Hands]:
@@ -151,7 +156,7 @@ class DataProcessBase:
         height, width, _ = frame.shape
         if height > width:
             frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
-        
+
         # 將圖片轉換為 RGB 格式, 並將圖片大小統一為 640x480以加速處理
         frame = cv2.resize(frame, (640, 480))
         imgRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -160,4 +165,3 @@ class DataProcessBase:
         result = self.mp_hands.process(imgRGB)
 
         return frame, result
-    
