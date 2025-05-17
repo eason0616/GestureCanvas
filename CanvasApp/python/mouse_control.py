@@ -80,6 +80,18 @@ class MouseController:
         except Exception as e:
             print(f"Error dragging mouse: {e}")
             return False
+        
+    def release(self, button='left'):
+        """
+        釋放滑鼠按鍵
+        button: 'left', 'right', 'middle'
+        """
+        try:
+            pyautogui.mouseUp(button=button)
+            return True
+        except Exception as e:
+            print(f"Error releasing mouse: {e}")
+            return False
 
 def demo():
     """
