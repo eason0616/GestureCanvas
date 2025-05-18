@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-from ModelTraining import LoadSave
+from Models import _LoadSave as LoadSave
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 np.set_printoptions(suppress=True)

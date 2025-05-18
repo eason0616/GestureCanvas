@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 
-from ModelTraining import LoadSave
+from Models import _LoadSave as LoadSave
 
 X, y = LoadSave.load_dataset(1)
 

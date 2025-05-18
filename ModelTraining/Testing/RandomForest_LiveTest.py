@@ -2,7 +2,7 @@ import cv2
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 
-from ModelTraining import LoadSave
+from Models import _LoadSave as LoadSave
 from ModelTraining.Testing.LiveTest_DataProcessing import LiveTest_DataProcessor as DataProcessor
 
 class GestureCanvas_RandomForest:

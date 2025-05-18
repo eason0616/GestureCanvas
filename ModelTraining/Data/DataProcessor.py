@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-from ModelTraining.Data.ProcessBase import DataProcessBase
+from ModelTraining.Data.DataProcessBase import DataProcessBase
 from ModelTraining.Data.DataAugmentation import HandDataAugmentation
 
 # 設定資料夾路徑
@@ -187,5 +187,5 @@ class HandRecognition_DataTransform(DataProcessBase):
 
 if __name__ == "__main__":
     handRecognition = HandRecognition_DataTransform()
-    handRecognition.ProcessingImages(show= False)
+    handRecognition.ProcessingImages(show= True)
     handRecognition.saveData()

@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
-import mediapipe as mp
+from typing import Optional, Tuple, Any
+from mediapipe.python.solutions import hands
+
+# 初始化 mediapipe 模組
+mp_hands = hands
 
 class DataProcessBase:
     """
@@ -21,7 +25,7 @@ class DataProcessBase:
         """
 
         # 宣告 MediaPipe 偵測手部關鍵點的物件
-        self.mp_hands = mp.solutions.hands.Hands(
+        self.mp_hands = mp_hands.Hands(
             static_image_mode=static_image_mode,    # 設定為靜態圖片模式
             max_num_hands=1,                        # 設定最大偵測手部數量為 1
             min_detection_confidence=0.5,           # 最小偵測信心值
@@ -34,7 +38,10 @@ class DataProcessBase:
         """
         self.mp_hands.close()
 
-    def Normalize_Landmark_Coords(self, landmarks, draw: bool = False, frame = None) -> tuple[np.ndarray, np.ndarray]:
+    def Normalize_Landmark_Coords(self,
+                                landmarks: Any,
+                                draw: bool = False,
+                                frame: Optional[np.ndarray] = None) -> Tuple[Optional[np.ndarray], np.ndarray]:
         """
         歸一化手部關鍵點座標
 
@@ -80,14 +87,18 @@ class DataProcessBase:
         coords = coords @ Rz
 
         # 如果有要繪製, 則將關鍵點及原始座標繪製到影像上
-        if draw and frame is not None:
+        if draw and frame is not None and origin_coords is not None:
             frame = self.Render_Landmarks(frame, center, coords, origin_coords)
             return frame, coords
         else:
             # 回傳歸一化後的座標, 並四捨五入到小數點後 4 位
             return None, np.round(coords, 4)
 
-    def Render_Landmarks(self, frame, center: tuple, coords: np.ndarray, origin_coords: np.ndarray) -> np.ndarray:
+    def Render_Landmarks(self,
+                        frame: np.ndarray,
+                        center: Tuple[float, float, float],
+                        coords: np.ndarray,
+                        origin_coords: np.ndarray) -> np.ndarray:
         """
         在畫面上渲染手部關鍵點。
 
@@ -140,7 +151,7 @@ class DataProcessBase:
 
         return frame
 
-    def PreprocessImage(self, frame: np.ndarray) -> tuple[np.ndarray, mp.solutions.hands.Hands]:
+    def PreprocessImage(self, frame: np.ndarray) -> Tuple[np.ndarray, Any]:
         """
         將圖片進行預處理, 包括旋轉、調整大小和顏色轉換
 

@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from ModelTraining.Data.ProcessBase import DataProcessBase
+from ModelTraining.Data.DataProcessBase import DataProcessBase
 
 import warnings
 warnings.filterwarnings("ignore", category= UserWarning)

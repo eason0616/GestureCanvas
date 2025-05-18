@@ -11,7 +11,7 @@ def load_dataset(info: int= 0) -> tuple[np.ndarray, np.ndarray]:
 
     # 獲取資料集路徑
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(dir_path, "Data", "DataSets")
+    data_path = os.path.join(dir_path, "..", "ModelTraining", "Data", "DataSets")
 
     # 獲取資料夾內所有資料集 (.npz檔)
     datasets = [dataset for dataset in os.listdir(data_path) if dataset.endswith('.npz')]
@@ -49,9 +49,9 @@ def save_model(model, model_name: str) -> None:
         model_name (str): 模型名稱
     """
 
-    # 設定模型儲存路徑, 路徑 .Data/TrainedModels/{ModelName}_Model.joblib
+    # 設定模型儲存路徑, 路徑 .Models/{ModelName}_Model.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(dir_path, "TrainedModels", model_name + "_Model.joblib")
+    model_path = os.path.join(dir_path, model_name + "_Model.joblib")
 
     # 使用設定路徑儲存模型
     dump(model, model_path)
@@ -69,15 +69,11 @@ def load_model(model_name: str) -> object:
         model_name (str): 模型名稱
     Returns:
         object: 載入的模型
-    Notes:
-        載入路徑為 .Data/TrainedModels/{ModelName}_Model.joblib
-    Example:
-        model = load_model("KMeans_2")
     """
 
-    # 設定模型載入路徑, 路徑 .Data/TrainedModels/{ModelName}_Model.joblib
+    # 設定模型載入路徑, 路徑 .Models/{ModelName}_Model.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(dir_path, "TrainedModels", model_name + "_Model.joblib")
+    model_path = os.path.join(dir_path, model_name + "_Model.joblib")
 
     # 顯示載入路徑
     print(f"Loading model from {model_path}")
@@ -96,9 +92,9 @@ def save_scaler(scaler, scaler_name: str) -> None:
         scaler_name (str): 標準化器名稱
     """
 
-    # 設定標準化器儲存路徑, 路徑 .Data/TrainedModels/{ScalerName}_Scaler.joblib
+    # 設定標準化器儲存路徑, 路徑 .Models/{ScalerName}_Scaler.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    scaler_path = os.path.join(dir_path, "TrainedModels", scaler_name + "_Scaler.joblib")
+    scaler_path = os.path.join(dir_path, scaler_name + "_Scaler.joblib")
 
     # 使用設定路徑儲存標準化器
     dump(scaler, scaler_path)
@@ -116,15 +112,11 @@ def load_scaler(scaler_name: str) -> StandardScaler:
         scaler_name (str): 標準化器名稱
     Returns:
         StandardScaler: 載入的標準化器
-    Notes:
-        載入路徑為 .Data/TrainedModels/{ScalerName}_Scaler.joblib
-    Example:
-        scaler = load_scaler("KMeans_2")
     """
 
-    # 設定標準化器載入路徑, 路徑 .Data/TrainedModels/{ScalerName}_Scaler.joblib
+    # 設定標準化器載入路徑, 路徑 .Models/{ScalerName}_Scaler.joblib
     dir_path = os.path.dirname(os.path.abspath(__file__))
-    scaler_path = os.path.join(dir_path, "TrainedModels", scaler_name + "_Scaler.joblib")
+    scaler_path = os.path.join(dir_path, scaler_name + "_Scaler.joblib")
 
     # 顯示載入路徑
     print(f"Loading scaler from {scaler_path}")

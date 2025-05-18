@@ -1,7 +1,7 @@
 import cv2
 import pyautogui
 
-import LoadSave
+from Models import _LoadSave as LoadSave
 from LiveTest_DataProcessing import LiveTest_DataProcessing as DataProcessing
 from mouse_control import MouseController
 
